@@ -88,29 +88,32 @@
                     @endforelse
                     </ul>
 
-                    <form method="POST" action="{{ route('tasks.store') }}" class="mt-4">
-                    @csrf
-                    <input type="hidden" name="workspace_id" value="{{ $workspace->id }}" />
-                    <input
-                        type="text"
-                        name="title"
-                        placeholder="New task title"
-                        required
-                        class="border rounded px-3 py-2 mr-2 dark:bg-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    />
-                    <input
-                        type="datetime-local"
-                        name="deadline"
-                        required
-                        class="border rounded px-3 py-2 mr-2 dark:bg-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    />
-                    <button
-                        type="submit"
-                        class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500"
-                    >
-                        Add Task
-                    </button>
-                    </form>
+                    {{-- @if ($user == $workspace->id) --}}
+                    <form method="POST" action="{{ route('tasks.store') }}" class="mt-8">
+                        @csrf
+                        <input type="hidden" name="workspace_id" value="{{ $workspace->id }}" />
+                        <h5 class="font-semibold mb-2 text-gray-800 dark:text-gray-200">Add New Task</h5>
+                            <input
+                                type="text"
+                                name="title"
+                                placeholder="New task title"
+                                required
+                                class="border rounded px-3 py-2 mr-2 dark:bg-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            />
+                            <input
+                                type="datetime-local"
+                                name="deadline"
+                                required
+                                class="border rounded px-3 py-2 mr-2 dark:bg-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            />
+                            <button
+                                type="submit"
+                                class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500"
+                            >
+                                Add Task
+                            </button>
+                        </form>
+                    {{-- @endif --}}
                 </div>
             </li>
           @empty

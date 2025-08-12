@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\WorkspaceController;
 use App\Models\Workspace;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,6 +16,7 @@ Route::get('/workspace', function () {
 
     return view('workspace', [
         'workspaces' => $workspaces,
+        'user' => Auth::id(),
     ]);
 })->middleware(['auth', 'verified'])->name('workspace');
 
@@ -28,15 +30,15 @@ Route::middleware('auth')->group(function () {
     Route::prefix('workspaces')->name('workspaces.')->group(function () {
         Route::controller(WorkspaceController::class)->group(function () {
             Route::post('/store', 'store')->name('store');
-            Route::delete('/delete/{workspace}', 'delete')->name('delete');
+            Route::delete('/delete/{workspace}', 'delete')->name('delete')->middleware('can:delete,workspace');
         });
     });
 
     Route::prefix('tasks')->name('tasks.')->group(function () {
         Route::controller(TaskController::class)->group(function () {
             Route::post('/store', 'store')->name('store');
-            Route::put('/update/{task}', 'update')->name('update');
-            Route::delete('/delete/{task}', 'delete')->name('delete');
+            Route::put('/update/{task}', 'update')->name('update')->middleware('can:update,task');
+            Route::delete('/delete/{task}', 'delete')->name('delete')->middleware('can:delete,task');
         });
     });
 });

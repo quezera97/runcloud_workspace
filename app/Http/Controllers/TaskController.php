@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\Workspace;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
+    use AuthorizesRequests;
+
     public function store(Request $request)
     {
         $request->validate([
