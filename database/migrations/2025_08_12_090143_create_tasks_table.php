@@ -14,10 +14,11 @@ return new class extends Migration
             $table->string('title');
             $table->dateTime('deadline');
             $table->boolean('completed')->default(false);
+            $table->dateTime('completed_at')->nullable();
+
             $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
-            $table->dateTime('completed_at')->nullable();
             $table->timestamps();
         });
     }

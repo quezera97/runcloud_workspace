@@ -10,6 +10,12 @@ class TaskController extends Controller
 {
     public function store(Request $request)
     {
+        $request->validate([
+            'workspace_id' => 'required|exists:workspaces,id',
+            'title' => 'required|string|max:255',
+            'deadline' => 'required|date',
+        ]);
+
         try {
             DB::beginTransaction();
 
@@ -26,22 +32,47 @@ class TaskController extends Controller
             return redirect()->back()->with('success', 'Task created successfully.');
         } catch (\Throwable $th) {
             DB::rollback();
-            throw $th;
+            return redirect()->back()->with('error', 'Failed to create task.');
         }
     }
 
     public function update(Request $request, Task $task)
     {
-        $task->completed = $request->completed;
+        try {
+            DB::beginTransaction();
 
-        if ($task->completed) {
-            $task->completed_at = now();
-        } else {
-            $task->completed_at = null;
+            $task->completed = $request->completed;
+
+            if ($task->completed) {
+                $task->completed_at = now();
+            } else {
+                $task->completed_at = null;
+            }
+
+            $task->save();
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Task updated successfully.');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect()->back()->with('error', 'Failed to update task.');
         }
+    }
 
-        $task->save();
+    public function delete(Request $request, Task $task)
+    {
+        try {
+            DB::beginTransaction();
 
-        return redirect()->back()->with('success', 'Task updated successfully.');
+            $task->delete();
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Task deleted successfully.');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect()->back()->with('error', 'Failed to delete task.');
+        }
     }
 }

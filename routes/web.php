@@ -10,13 +10,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
+Route::get('/workspace', function () {
     $workspaces = Workspace::get();
 
-    return view('dashboard', [
+    return view('workspace', [
         'workspaces' => $workspaces,
     ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('workspace');
 
 Route::middleware('auth')->group(function () {
     Route::controller(ProfileController::class)->group(function () {
@@ -28,16 +28,15 @@ Route::middleware('auth')->group(function () {
     Route::prefix('workspaces')->name('workspaces.')->group(function () {
         Route::controller(WorkspaceController::class)->group(function () {
             Route::post('/store', 'store')->name('store');
-            Route::put('/update', 'update')->name('update');
-            Route::delete('/delete', 'delete')->name('delete');
+            Route::delete('/delete/{workspace}', 'delete')->name('delete');
         });
     });
 
     Route::prefix('tasks')->name('tasks.')->group(function () {
         Route::controller(TaskController::class)->group(function () {
             Route::post('/store', 'store')->name('store');
-            Route::put('/update', 'update')->name('update');
-            Route::delete('/delete', 'delete')->name('delete');
+            Route::put('/update/{task}', 'update')->name('update');
+            Route::delete('/delete/{task}', 'delete')->name('delete');
         });
     });
 });
