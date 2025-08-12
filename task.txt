@@ -1,0 +1,15 @@
+TECHNICAL ASSESSMENT SOFTWARE ENGINEER
+
+Create a simple Web application (Laravel)
+
+Requirement:
+
+1. User can register and login with username, password, and email. (done)
+2. User can create a workspace to work with.
+3. In every workspace, users can create tasks with a compulsory deadline (date and time).
+4. The task can be set as completed or incomplete and the status is shown in a task view.
+5. Incomplete tasks must show how far the deadline is in a human readable way. eg: (2 days 5 minutes remaining).
+6. Completed tasks need to show when the task has been completed in a human readable way. eg: (2 days ago, 5 minutes ago).
+7. Each workspace and task must be protected so that another user can't access that workspace and task.
+
+The code needs to be shared for review and the web application must be accessible online.
