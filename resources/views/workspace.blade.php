@@ -92,27 +92,42 @@
                     <form method="POST" action="{{ route('tasks.store') }}" class="mt-8">
                         @csrf
                         <input type="hidden" name="workspace_id" value="{{ $workspace->id }}" />
-                        <h5 class="font-semibold mb-2 text-gray-800 dark:text-gray-200">Add New Task</h5>
+
+                        <div class="mb-4">
+                            <label for="title" class="block font-semibold mb-1 text-gray-800 dark:text-gray-200">
+                                Add New Task
+                            </label>
                             <input
+                                id="title"
                                 type="text"
                                 name="title"
                                 placeholder="New task title"
                                 required
-                                class="border rounded px-3 py-2 mr-2 dark:bg-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                class="border rounded px-3 py-2 w-full dark:bg-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
                             />
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="deadline" class="block font-semibold mb-1 text-gray-800 dark:text-gray-200">
+                                Deadline
+                            </label>
                             <input
+                                id="deadline"
                                 type="datetime-local"
                                 name="deadline"
                                 required
-                                class="border rounded px-3 py-2 mr-2 dark:bg-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                class="border rounded px-3 py-2 w-full dark:bg-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
                             />
-                            <button
-                                type="submit"
-                                class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500"
-                            >
-                                Add Task
-                            </button>
-                        </form>
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500"
+                        >
+                            Add Task
+                        </button>
+                    </form>
+
                     {{-- @endif --}}
                 </div>
             </li>
