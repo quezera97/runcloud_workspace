@@ -24,13 +24,11 @@ Docker (optional)
 ```sh
 docker compose up --build 
 ```
+.env docker database setup example
 
-.env for database 
 1. DB_USERNAME must be other than root
 2. DB_PASSWORD cannot be empty
-
-.env database setup example
-----------------------
+   
 ```sh
 DB_CONNECTION=mysql
 DB_HOST=database # Docker database service
